@@ -5,13 +5,14 @@ var game = {
   enemyAtk: 10,
   enemyDefence: 5,
   enemyLife: 50,
+  decision: Math.random(),
   attack: function(){
 //lowers your defense for attacking
     game.playerDefence = game.playerDefence - (Math.ceil(Math.random()*2));
 //doesn't allow defense to go below 0
     switch(game.playerDefence<0) {
       case true:
-      game.playerDefence = 0
+      game.playerDefence = 0;
       console.log("your defense: "+game.playerDefence);
       break;
 
@@ -136,33 +137,86 @@ var game = {
       break;
 
       case false:
-//lowers your attack for defending
+//lowers enemy attack for defending
       game.enemyAtk = game.enemyAtk - (Math.ceil(Math.random()*3));
-      console.log("your attack: "+game.enemyAtk)
+      console.log("enemy attack: "+game.enemyAtk)
       break;
 
 
     };
 
   },
+  //lets the enemy decide to attack or defend
   decide: function(){
-    var decision = Math.random();
-    if (game.decision > .33 && health >= 25){
-      game.enemyAtk();
-    } else if(game.decision > .33 && health){
-      game.enemyDefence();
-    } else if()
+    if (game.decision > .33 && game.enemyLife > 25){
+      console.log("--Your enemy attacks!--");
+      game.enemyAttack();
+    } else if(game.decision > .33 && game.enemyLife <= 25){
+      console.log("--Your enemy defends!--");
+      game.enemyDefend();
+    } else if(game.decision < .33){
+      switch(Math.random()<.5){
+        case true:
+        console.log("--Your enemy attacks!--")
+        game.enemyAttack()
+        break;
+
+        case false:
+        console.log("--Your enemy defends!--")
+        game.enemyDefend()
+        break;
+      };
+    };
   }
 
 };
 
 $("#attack").on("mouseup", function(){
   game.attack();
-  setTimeout(game.decide(), 1s);
+  console.log("----------------------")
+
+  // $("#attack").id("#dontAttack")
+
+  setTimeout(function(){
+    $("#player").html("<img id='avatar' src='images/idle.gif'>");
+    // $("#dontAttack").id("#attack");
+  }, 1800);
+
+  setTimeout(game.decide, 1000);
+  $("#player").html("<img id='avatar' src='images/jump-forward.png'>");
+
+  $("#avatar").stop(true,true).animate({left: 900}, 500);
+
+  setTimeout(function(){
+    $("#player").html("<img id='avatar' src='images/attack1.png'>");
+    $("#avatar").css("left", "950px");
+  }, 500);
+  setTimeout(function(){
+    $("#player").html("<img id='avatar' src='images/attack2.png'>");
+    $("#avatar").css("left", "950px");
+  }, 600);
+  setTimeout(function(){
+    $("#player").html("<img id='avatar' src='images/attack1.png'>");
+    $("#avatar").css("left", "950px");
+  }, 700);
+  setTimeout(function(){
+    $("#player").html("<img id='avatar' src='images/kick1.png'>");
+    $("#avatar").css("left", "950px");
+  }, 800);
+
+  setTimeout(function(){
+    $("#player").html("<img id='avatar' src='images/jump-back.png'>");
+    $("#avatar").css("left", "950px");
+    $("#avatar").stop(true,true).animate({left: 50}, 800);
+  }, 1000)
+
 });
+ // $("#player").html("<img id='avatar' src='images/jump-back.png'>")
 
 $("#defend").on("mouseup", function(){
   game.defend();
+  console.log("----------------------")
+  setTimeout(game.decide, 1000);
 });
 
 function test(){
