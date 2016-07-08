@@ -146,7 +146,12 @@ var game = {
 
   },
   decide: function(){
-    Math.random()
+    var decision = Math.random();
+    if (game.decision > .33 && health >= 25){
+      game.enemyAtk();
+    } else if(game.decision > .33 && health){
+      game.enemyDefence();
+    } else if()
   }
 
 };
