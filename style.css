@@ -1,34 +1,84 @@
+*{
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+@font-face {
+    font-family: pixel;
+    src: url('./coders_crux.ttf');
+}
+
+body{
+  background: url('images/background.gif');
+  background-size: 146%;
+  background-position: top;
+  background-repeat: no-repeat;
+  image-rendering: auto;
+  image-rendering: crisp-edges;
+  image-rendering: pixelated;
+}
+
+#enemyHealthBar{
+  height:15px;
+  width:220px;
+  background-color: red;
+  position: absolute;
+  border-radius: 8px;
+  float:right;
+  right: 73px;
+  top: 47px;
+
+}
+
+#infoBar{
+  height: 165px;
+  width: 98.8%;
+  background-color: grey;
+  border-bottom: 8px solid #2F4F4F;
+  border-left: 8px solid #2F4F4F;
+  border-top: 8px solid #D3D3D3;
+  border-right: 8px solid #D3D3D3;
+  margin: 0 0 0 -8px;
+  position: absolute;
+  bottom: 0;
+}
+
 #option-container{
   height: 120px;
   width: 300px;
-  position: absolute;
-  bottom: 20px;
+  position: relative;
+  bottom: -25px;
   left: 20px;
-  background-color: #8A4FFF;
-  border: 1px solid black;
   display: flex;
-  border-radius: 5px;
 
 }
 
 #attack{
   float: left;
   flex: 1;
-  background-color: #C3BEF7;
-  border: 1px solid black;
-  margin: 8px 4px 8px 8px;
-  border-radius: 5px;
-
+  background-color: grey;
+  border-bottom: 8px solid #2F4F4F;
+  border-left: 8px solid #2F4F4F;
+  border-top: 8px solid #D3D3D3;
+  border-right: 8px solid #D3D3D3;
+  font: pixel;
+  font-size: 20px;
 }
 
 #defend{
   float: right;
   flex: 1;
-  background-color: #E5ECF4;
-  border: 1px solid black;
-  margin: 8px 8px 8px 4px;
-  border-radius: 5px; 
+  background-color: grey;
+  border-bottom: 8px solid #2F4F4F;
+  border-left: 8px solid #2F4F4F;
+  border-top: 8px solid #D3D3D3;
+  border-right: 8px solid #D3D3D3;
 }
+
 #health{
   height:80px;
   width:300px;
@@ -37,13 +87,100 @@
   image-rendering: pixelated;
 }
 
+#enemyHealth{
+  height:80px;
+  width:300px;
+  image-rendering: auto;
+  image-rendering: crisp-edges;
+  image-rendering: pixelated;
+  float: right;
+  position: absolute;
+  right: 8px;
+  z-index: 1;
+}
+
+#enemyInfo{
+  margin-top: 20px;
+  margin-right: 60px;
+  color: white;
+  background-color: grey;
+  display: inline-block;
+  padding: 0 5px;
+  border-bottom: 8px solid #2F4F4F;
+  border-left: 8px solid #2F4F4F;
+  border-top: 8px solid #D3D3D3;
+  border-right: 8px solid #D3D3D3;
+  float:right;
+}
+
+
+
+#playerHealthBar{
+  height:15px;
+  width:220px;
+  background-color: red;
+  margin: -45px 0 0 66px;
+  border-radius: 8px;
+}
+
+#enemyDefence{
+  margin-top: -15px;
+}
+
+#enemyAttack{
+  margin-top: -15px;
+  margin-bottom: 3px;
+}
+
+#enemyHealthNumber{
+  margin-top: 3px;
+}
+
+#playerInfo{
+  margin-top: 20px;
+  margin-left: 60px;
+  color: white;
+  background-color: grey;
+  display: inline-block;
+  padding: 0 5px;
+  border-bottom: 8px solid #2F4F4F;
+  border-left: 8px solid #2F4F4F;
+  border-top: 8px solid #D3D3D3;
+  border-right: 8px solid #D3D3D3;
+}
+
+
+#playerDefence{
+  margin-top: -15px;
+}
+
+#playerAttack{
+  margin-top: -15px;
+  margin-bottom: 3px;
+}
+
+#playerHealth{
+  margin-top: 3px;
+}
+
 #avatar{
-  height: 25%;
-  width: 8%;
+  height: 200px;
+  width: 110px;
   image-rendering: auto;
   image-rendering: crisp-edges;
   image-rendering: pixelated;
   position: absolute;
   bottom: 200px;
   left: 50px;
+}
+
+#enemyAvatar{
+  height:200;
+  width: 110px;
+  image-rendering: auto;
+  image-rendering: crisp-edges;
+  image-rendering: pixelated;
+  position: absolute;
+  bottom: 200px;
+  right: 50px;
 }

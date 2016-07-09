@@ -5,6 +5,9 @@ var game = {
   enemyAtk: 10,
   enemyDefence: 5,
   enemyLife: 50,
+  playerMaxLife: 50,
+  clickability: true,
+  barLength: 220,
   decision: Math.random(),
   attack: function(){
 //lowers your defense for attacking
@@ -46,6 +49,7 @@ var game = {
       case true:
       game.enemyLife = 0
       console.log("YOU WIN")
+      game.playerLife = game.playerMaxLife
       break;
 
       case false:
@@ -57,7 +61,7 @@ var game = {
   defend: function(){
 
 //Increases defense
-    game.playerDefence = game.playerDefence + (Math.ceil(Math.random()*(5)+2));
+    game.playerDefence = game.playerDefence + (Math.ceil(Math.random()*(5)+3));
     console.log("your Defense: "+game.playerDefence)
 
 //doesn't allow attack to go below 0
@@ -69,7 +73,7 @@ var game = {
 
       case false:
 //lowers your attack for defending
-      game.playerAtk = game.playerAtk - (Math.ceil(Math.random()*3));
+      // game.playerAtk = game.playerAtk - (Math.ceil(Math.random()*3));
       console.log("your attack: "+game.playerAtk)
       break;
 
@@ -79,7 +83,7 @@ var game = {
   },
   enemyAttack: function(){
 //lowers enemy defense for attacking
-    game.enemyDefence = game.enemyDefence - (Math.ceil(Math.random()*2));
+    game.enemyDefence = game.enemyDefence - (Math.ceil(Math.random()*3));
 //doesn't allow enemy defense to go below 0
     switch(game.enemyDefence<0) {
       case true:
@@ -97,7 +101,7 @@ var game = {
     switch(game.enemyAtk<=game.playerDefence) {
       case true:
       console.log("It cant do enough damage!");
-      game.playerDefence = game.playerDefence - Math.floor(.5*game.enemyAtk)
+      game.playerDefence = game.playerDefence - Math.floor(.4*game.enemyAtk)
       break;
 
       case false:
@@ -108,7 +112,7 @@ var game = {
     };
 
 //increases enemy attack for attacking
-    game.enemyAtk = game.enemyAtk + (Math.ceil(Math.random()*(5)+1));
+    game.enemyAtk = game.enemyAtk + (Math.ceil(Math.random()*(4)+1));
     console.log("enemy's new attack: "+game.enemyAtk);
 
 //this detects if the enemy has won or not
@@ -137,8 +141,8 @@ var game = {
       break;
 
       case false:
-//lowers enemy attack for defending
-      game.enemyAtk = game.enemyAtk - (Math.ceil(Math.random()*3));
+
+      // game.enemyAtk = game.enemyAtk - (Math.ceil(Math.random()*3));
       console.log("enemy attack: "+game.enemyAtk)
       break;
 
@@ -148,13 +152,13 @@ var game = {
   },
   //lets the enemy decide to attack or defend
   decide: function(){
-    if (game.decision > .33 && game.enemyLife > 25){
+    if (game.decision > .4 && game.enemyLife > 25){
       console.log("--Your enemy attacks!--");
       game.enemyAttack();
-    } else if(game.decision > .33 && game.enemyLife <= 25){
+    } else if(game.decision > .4 && game.enemyLife <= 25){
       console.log("--Your enemy defends!--");
       game.enemyDefend();
-    } else if(game.decision < .33){
+    } else if(game.decision < .4){
       switch(Math.random()<.5){
         case true:
         console.log("--Your enemy attacks!--")
@@ -167,58 +171,87 @@ var game = {
         break;
       };
     };
+  },
+
+  lifeBar: function(){
+  game.barLength = ((game.playerLife / game.playerMaxLife) * 220);
   }
 
 };
 
+
 $("#attack").on("mouseup", function(){
-  game.attack();
-  console.log("----------------------")
+  if(game.clickability === true){
+    game.clickability = false;
+    game.attack();
 
-  // $("#attack").id("#dontAttack")
+    console.log("----------------------")
 
-  setTimeout(function(){
-    $("#player").html("<img id='avatar' src='images/idle.gif'>");
-    // $("#dontAttack").id("#attack");
-  }, 1800);
+    setTimeout(game.decide, 2300);
 
-  setTimeout(game.decide, 1000);
-  $("#player").html("<img id='avatar' src='images/jump-forward.png'>");
+    setTimeout(function(){
+      game.lifeBar();
+      $("#playerHealthBar").css("width", game.barLength);
+      $("#playerHealth").html("Health: "+game.playerLife+"/"+game.playerMaxLife);
+      $("#playerDefence").html("Defence: "+game.playerDefence);
+      $("#playerAttack").html("Attack: "+game.playerAtk)
+    }, 1801);
 
-  $("#avatar").stop(true,true).animate({left: 900}, 500);
+    setTimeout(function(){
+      $("#player").html("<img id='avatar' src='images/idle.gif'>");
+      game.clickability = true;
+    }, 1800);
 
-  setTimeout(function(){
-    $("#player").html("<img id='avatar' src='images/attack1.png'>");
-    $("#avatar").css("left", "950px");
-  }, 500);
-  setTimeout(function(){
-    $("#player").html("<img id='avatar' src='images/attack2.png'>");
-    $("#avatar").css("left", "950px");
-  }, 600);
-  setTimeout(function(){
-    $("#player").html("<img id='avatar' src='images/attack1.png'>");
-    $("#avatar").css("left", "950px");
-  }, 700);
-  setTimeout(function(){
-    $("#player").html("<img id='avatar' src='images/kick1.png'>");
-    $("#avatar").css("left", "950px");
-  }, 800);
+    $("#player").html("<img id='avatar' src='images/jump-forward.png'>");
 
-  setTimeout(function(){
-    $("#player").html("<img id='avatar' src='images/jump-back.png'>");
-    $("#avatar").css("left", "950px");
-    $("#avatar").stop(true,true).animate({left: 50}, 800);
-  }, 1000)
+    $("#avatar").stop(true,true).animate({left: 1110}, 500);
 
+    setTimeout(function(){
+      $("#player").html("<img id='avatar' src='images/attack1.png'>");
+      $("#avatar").css("left", "1110px");
+      $("#enemy").html("<img id='enemyAvatar' src='images/enemy-hurt.png'>");
+    }, 500);
+    setTimeout(function(){
+      $("#player").html("<img id='avatar' src='images/attack2.png'>");
+      $("#avatar").css("left", "1110px");
+    }, 600);
+    setTimeout(function(){
+      $("#player").html("<img id='avatar' src='images/attack1.png'>");
+      $("#avatar").css("left", "1110px");
+    }, 700);
+    setTimeout(function(){
+      $("#player").html("<img id='avatar' src='images/kick1.png'>");
+      $("#avatar").css("left", "1110px");
+    }, 800);
+
+    setTimeout(function(){
+      $("#player").html("<img id='avatar' src='images/jump-back.png'>");
+      $("#avatar").css("left", "1110px");
+      $("#avatar").stop(true,true).animate({left: 50}, 800);
+    }, 1000);
+
+    setTimeout(function(){
+      $("#enemy").html("<img id='enemyAvatar' src='images/enemy-idle.gif'>");
+    }, 1400)
+  }
 });
- // $("#player").html("<img id='avatar' src='images/jump-back.png'>")
+
 
 $("#defend").on("mouseup", function(){
+  if(game.clickability === true){
+    game.clickability = false;
   game.defend();
   console.log("----------------------")
   setTimeout(game.decide, 1000);
-});
-
-function test(){
-  console.log(Math.ceil(Math.random()*3))
+  setTimeout(function(){
+    game.lifeBar();
+    $("#playerHealthBar").css("width", game.barLength);
+    $("#playerHealth").html("Health: "+game.playerLife+"/"+game.playerMaxLife);
+    $("#playerDefence").html("defense: "+game.playerDefence);
+    game.clickability = true;
+  }, 1001);
+  $("#playerDefence").html("defense: "+game.playerDefence);
+  $("#player").html("<img id='avatar' src='images/defense-stance.gif'>");
+  $("#avatar").css("width", "93px");
 }
+});

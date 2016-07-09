@@ -4,14 +4,34 @@
   <title>Fighting Game</title>
   <link rel="stylesheet" type="text/css" href="style.css">
 </head>
-<img id="health" src="images/health-bar.gif">
+
 <body>
-  <div id="option-container">
-      <div id="attack">attack</div>
-      <div id="defend">defend</div>
+<img id="health" src="images/health-bar.gif">
+<img id="enemyHealth" src="images/enemy-health-bar.gif">
+</img>
+  <div id="infoBar">
+    <div id="option-container">
+        <div id="attack">attack</div>
+        <div id="defend">defend</div>
+    </div>
   </div>
   <div id="player">
     <img id='avatar' src='images/idle.gif'>
+  </div>
+  <div id="enemy">
+    <img id="enemyAvatar" src="images/enemy-idle.gif">
+  </div>
+  <div id="playerHealthBar"></div>
+  <div id="playerInfo">
+    <p id="playerHealth">Health: 50/50</p>
+    <p id="playerDefence">Defence: 5</p>
+    <p id="playerAttack">Attack: 10</p>
+  </div>
+  <div id="enemyHealthBar"></div>
+  <div id="enemyInfo">
+    <p id="enemyHealthNumber">Health: 50/50</p>
+    <p id="enemyDefence">Defence: 5</p>
+    <p id="enemyAttack">Attack: 10</p>
   </div>
 
 </body>
