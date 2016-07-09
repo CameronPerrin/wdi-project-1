@@ -7,11 +7,6 @@
   user-select: none;
 }
 
-@font-face {
-    font-family: pixel;
-    src: url('./coders_crux.ttf');
-}
-
 body{
   background: url('images/background.gif');
   background-size: 146%;
@@ -65,8 +60,6 @@ body{
   border-left: 8px solid #2F4F4F;
   border-top: 8px solid #D3D3D3;
   border-right: 8px solid #D3D3D3;
-  font: pixel;
-  font-size: 20px;
 }
 
 #defend{
@@ -174,8 +167,14 @@ body{
   left: 50px;
 }
 
+#enemy{
+  position: absolute;
+  bottom: 0px;
+  right: 50px;
+}
+
 #enemyAvatar{
-  height:200;
+  height:200px;
   width: 110px;
   image-rendering: auto;
   image-rendering: crisp-edges;
@@ -183,4 +182,17 @@ body{
   position: absolute;
   bottom: 200px;
   right: 50px;
+}
+
+#textBar{
+  height: 104px;
+  width: 700px;
+  background-color: grey;
+  border-bottom: 8px solid #2F4F4F;
+  border-left: 8px solid #2F4F4F;
+  border-top: 8px solid #D3D3D3;
+  border-right: 8px solid #D3D3D3;
+  position: absolute;
+  bottom: 20px;
+  right: 200px;
 }
