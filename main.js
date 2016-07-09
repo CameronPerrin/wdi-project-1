@@ -32,7 +32,7 @@ var game = {
     switch(game.playerAtk<=game.enemyDefence) {
       case true:
       game.enemyDefense = game.enemyDefense - Math.floor(.5*game.playerAtk)
-      $(textInfo).html("You can't do enough damage!");
+      $("#textInfo").html("You can't do enough damage!");
       console.log("enemy Life: "+game.enemyLife);
       break;
 
@@ -52,7 +52,7 @@ var game = {
       case true:
       game.enemyLife = 0
       game.getsToDecide = false
-      $(textInfo).html("Congratulations, YOU WIN!");
+      $("#textInfo").html("Congratulations, YOU WIN!");
       setTimeout(function(){
         $("#enemy").html("<img id='enemyAvatar' src='images/enemy-dead.png'>");
         $("#enemyAvatar").css("height", "100px");
@@ -172,7 +172,7 @@ var game = {
 //doesn't allow you to do damage if your attack is lower than enemy defense
     switch(game.enemyAtk<=game.playerDefence) {
       case true:
-      $(textInfo).html("The enemy cant do enough damage!");
+      $("#textInfo").html("The enemy cant do enough damage!");
       game.playerDefence = game.playerDefence - Math.floor(.4*game.enemyAtk)
       break;
 
@@ -194,12 +194,20 @@ var game = {
     switch(game.playerLife <= 0){
       case true:
       game.playerLife = 0
-      $(textInfo).html("GAME OVER");
+      $("#textInfo").html("GAME OVER");
       setTimeout(function(){
-        $("#player").html("<img id='avatar' src='images/enemy-dead.png'>");
+        $("#player").html("<img id='avatar' src='images/player-dead.png'>");
         $("#avatar").css("height", "100px");
         $("#avatar").css("width", "200px");
-        $("#avatar").css("bottom", "175px");
+        $("#avatar").css("bottom", "190px");
+        $("#tryAgain").html("<div id='infoBar'>Try again? <div id='yes'>yes</div><div id='no'>no</div></div>")
+        $("#yes").on("click", function(){
+          location.reload(false);
+        });
+        $("#no").on("click", function(){
+          $("#tryAgain").html("<div id='infoBar'>GAME OVER</div>")
+          $("#tryAgain").css("font-size", "140px")
+        });
       }, 3350)
       break;
 
@@ -239,13 +247,13 @@ var game = {
   },
   //lets the enemy decide to attack or defend
   decide: function(){
-    if (game.decision > .4 && game.enemyLife > 25){
+    if (game.decision > .66 && game.enemyLife > 25){
       console.log("--Your enemy attacks!--");
       game.enemyAttack();
-    } else if(game.decision > .4 && game.enemyLife <= 25){
+    } else if(game.decision > .33 && game.enemyLife <= 25){
       console.log("--Your enemy defends!--");
       game.enemyDefend();
-    } else if(game.decision < .4){
+    } else if(game.decision < .66){
       switch(Math.random()<.5){
         case true:
         console.log("--Your enemy attacks!--")

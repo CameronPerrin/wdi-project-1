@@ -196,3 +196,39 @@ body{
   bottom: 20px;
   right: 200px;
 }
+
+#tryAgain{
+font-size: 30px;
+text-align: center;
+}
+
+#yes{
+  height: 50px;
+  width: 100px;
+  background-color: grey;
+  border-bottom: 8px solid #2F4F4F;
+  border-left: 8px solid #2F4F4F;
+  border-top: 8px solid #D3D3D3;
+  border-right: 8px solid #D3D3D3;
+  position: absolute;
+  left: 50%;
+  margin-left: -60px
+}
+
+#no{
+  height: 50px;
+  width: 100px;
+  background-color: grey;
+  border-bottom: 8px solid #2F4F4F;
+  border-left: 8px solid #2F4F4F;
+  border-top: 8px solid #D3D3D3;
+  border-right: 8px solid #D3D3D3;
+  position: absolute;
+  left: 50%;
+  margin-left: -60px;
+  bottom: 0;
+}
+
+#textInfo{
+  font-size: 40px;
+}
